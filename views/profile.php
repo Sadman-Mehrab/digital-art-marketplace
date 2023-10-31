@@ -22,7 +22,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $user['userName'] ?></title>
+    <title><?php echo $user['userName']." Profile"?></title>
 </head>
 <body>
     <center>
@@ -88,20 +88,18 @@
 </center>
 
 <center>
-    <?php if(!$artworks) {
-        echo "<center>User {$userName} does not have any artworks!</center>";
-        return;
-    }
-    ?>
+
     <table>
         <tr>
             <?php while($artwork = mysqli_fetch_assoc($artworks)){ ?>
             <td>
-                <img src="<?php echo $artwork['image']?>" alt="" width="150px">
-                <p><b> <?php echo $artwork['artworkName']?> </b> </p>
-                <p> $<?php echo $artwork['price']?> </p>
-                <input type="submit" name="view" value="View">
-                <input type="submit" name="buy" value="Buy">
+                <img src="<?php echo $artwork['image'] ?>" alt="" width="150px">
+                <p><b> <?php echo $artwork['artworkName'] ?> </b> </p>
+                <p> $<?php echo $artwork['price'] ?> </p>
+                View: <input type="submit" name="artworkName" value="<?php echo $artwork['artworkName'] ?>">
+                <br>
+                <br>
+                Buy: <input type="submit" name="artworkName" value="<?php echo $artwork['artworkName'] ?>">
             </td>
             <?php   }?>
         </tr>
