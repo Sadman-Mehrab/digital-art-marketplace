@@ -2,8 +2,6 @@
 
     require_once('db.php');
 
-    
-
 
 
     function getUserArtworks($ownerName){

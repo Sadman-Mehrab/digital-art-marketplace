@@ -6,11 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="views/profile.php" method="get">
-        <input type="submit" name="userName" value="risun123">
-        <input type="submit" name="userName" value="Mehrab">
 
-    </form>
-    
+    <a href="views/profile.php?userName=risun123"><button>Risun Sex</button></a>
+    <a href="views/profile.php?userName=Mehrab"><button>Mehrab</button></a>
 </body>
 </html>

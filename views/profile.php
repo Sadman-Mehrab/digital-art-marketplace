@@ -96,10 +96,8 @@
                 <img src="<?php echo $artwork['image'] ?>" alt="" width="150px">
                 <p><b> <?php echo $artwork['artworkName'] ?> </b> </p>
                 <p> $<?php echo $artwork['price'] ?> </p>
-                View: <input type="submit" name="artworkName" value="<?php echo $artwork['artworkName'] ?>">
-                <br>
-                <br>
-                Buy: <input type="submit" name="artworkName" value="<?php echo $artwork['artworkName'] ?>">
+                <!-- <a href="views/profile.php?userName=risun123"><button>View</button></a>
+                <a href="views/profile.php?userName=risun123"><button>Buy</button></a> -->
             </td>
             <?php   }?>
         </tr>
