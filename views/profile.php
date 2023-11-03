@@ -93,9 +93,11 @@
         <tr>
             <?php while($artwork = mysqli_fetch_assoc($artworks)){ ?>
             <td>
-                <img src="<?php echo $artwork['image'] ?>" alt="" width="150px">
-                <p><b> <?php echo $artwork['artworkName'] ?> </b> </p>
-                <p> $<?php echo $artwork['price'] ?> </p>
+                <a href="artwork.php?id=<?php echo $artwork['id']?>">
+                    <img src="<?php echo $artwork['image'] ?>" alt="" width="150px">
+                    <p><center><b> <?php echo $artwork['artworkName'] ?> </b></center> </p>
+                    <p><center> <?php echo $artwork['price'] ?> ArtCoin </center></p>
+                </a>
                 <!-- <a href="views/profile.php?userName=risun123"><button>View</button></a>
                 <a href="views/profile.php?userName=risun123"><button>Buy</button></a> -->
             </td>

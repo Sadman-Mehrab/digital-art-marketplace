@@ -4,5 +4,5 @@
     $password = $_REQUEST['password'];
 
     $_SESSION['currentUserName'] = $userName;
-    header('location: ../views/addArtwork.php');
+    header('location: ../views/addArtwork.html');
 ?>
