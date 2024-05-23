@@ -1,6 +1,8 @@
 <?php
-    session_start();
+    // session_start();
+    require_once('sessionCheck.php');
     require_once('../models/artworkModel.php');
+    require_once('../models/notificationModel.php');
     $currentUserName = $_SESSION['currentUserName'];
     
     $artworkName = $_REQUEST['artworkName'];
@@ -12,11 +14,16 @@
     $artworkOwnerName = $currentUserName;
     $artworkFileName = "";
     $artworkAddingDate = date("Y-m-d");
-    $artworkLikes = 0;
+    $artworkViews = 0;
 
     
     $imageSource = $_FILES['uploadedImage']['tmp_name'];
     $imageDestination = "../assets/artworks/".$_FILES['uploadedImage']['name'];
+
+    if(!$imageSource){
+        echo 'Please Add An Image!';
+        return;
+    }
 
     $isArtworkUploadValid = false;
     $isArtworkNameValid = true;
@@ -56,6 +63,10 @@
             echo 'Arwork Upload Error!';         
         }
     }
+    else{
+        echo 'Arwork Upload Error!';         
+    }
+        
 
     if($isArtworkUploadValid && $isArtworkNameValid && $isArtworkPriceValid && $isArtworkDescriptionValid && $isArtworkPurchaseableValid){
         $artwork = [
@@ -65,7 +76,7 @@
                     'description' => $artworkDescription,
                     'id' => $artworkId,
                     'image' => $artworkFileName,
-                    'likes' => $artworkLikes,
+                    'views' => $artworkViews,
                     'ownerName' => $artworkOwnerName,
                     'price' => $artworkPrice,
                     'purchaseAble' => $artworkPurchaseable
@@ -73,9 +84,10 @@
         $status = addArtwork($artwork);
         if($status){
             echo 'Artwork Successfuly Added!';
+            createNotification($currentUserName, "Artwork: {$artwork['artworkName']} Added With Price: {$artwork['price']} ArtCoin");
+            header("location: ../views/user.php");
         }else{
             echo 'Artwork Add Unsuccessful!';
         }
-        header("location: ../views/profile.php?userName={$currentUserName}");
     }
 ?>

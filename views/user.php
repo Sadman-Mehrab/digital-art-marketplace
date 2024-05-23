@@ -1,127 +1,181 @@
+<?php
+    // session_start();
+    require_once('../controllers/sessionCheck.php');
+    require_once('../models/userModel.php');
+    require_once('../models/artworkModel.php');
+    $userName = $_SESSION['currentUserName'];
+    
+    $user = getUser($userName);
+    $artworks = getUserArtworks($userName);
+
+    if(!$user) {
+        echo "User {$userName} not found!";
+        return;
+    }
+    
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
+    <title><?php echo "User ".$user['userName'] ?></title>
+    <link rel="stylesheet" href="../assets/styles/style.css">
 </head>
 <body>
     <center>
-        <h2>User</h2>
+    <table width="100%">
+                <tr>
+                    <td colspan="8"><a href=homepage.php><img src="../assets/head.PNG"></a></td>
+                    <td>
+                        <a href="user.php" >
+                            User
+                        </a><br>
+                        <a href="menu.html" >
+                            Menu
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        <table>
+
+
+        
+        <h2><?php echo $user['userName'] ?></h2>
     </center>
     
     <center>
-            <table>
+            <table class="userInfoCard generalText" >
             <tr>
+                <td>
+                    <img class="profilePicture" src="<?php echo $user['profilePicture'] ?>" alt=""> <br>
+                </td>
+
                 <td>
                     <table >
                     <tr>
-                            <td><b>Username: </b></td>
-                            <td>user13234</td>
-                            
-                        </tr>
-                        <tr>
-                            <td><b>First Name: </b></td>
-                            <td>user</td>
-                        </tr>
-                        <tr>
-                            <td><b>Last Name: </b></td>
-                            <td>123</td>
-                        </tr>
-                        <tr>
-                            <td><b>Phone : </b></td>
-                            <td>01795356295</td>
-                        </tr>
-                        <tr>
-                            <td><b>Email : </b></td>
-                            <td>user123@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td><b>Gender: </b></td>
-                            <td>Male</td>
-                        </tr>
-                        <tr>
-                            <td><b>Blood Group: </b></td>
-                            <td>B+</td>
-                        </tr> 
-                         <tr>
-                            <td><b>Date of Birth: </b></td>
-                            <td>07/07/2001</td>
-                        </tr>
-                        <tr>
-                            <td><b>Joining Date: </b></td>
-                            <td>07/07/2021</td>
-                        </tr>
-                        <!-- Only Show if User is Artist -->
-                        <!-- <tr>
-                            <td><b>Total Likes: </b></td>
-                            <td>57</td>
-                        </tr> -->
-                        <tr>
-                            <td><b>Balance: </b></td>
-                            <td>150 ArtCoins</td>
-                        </tr>
-                        
+                        <td><b>Username</b></td>
+                        <td>:<?php echo $user['userName'] ?></td>             
+                    </tr>
+                    <tr>
+                        <td><b>First Name</b></td>
+                        <td>:<?php echo $user['firstName'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Last Name</b></td>
+                        <td>:<?php echo $user['lastName'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Email</b></td>
+                        <td>:<?php echo $user['email'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Phone Number</b></td>
+                        <td>:<?php echo $user['phoneNumber'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Gender</b></td>
+                        <td>:<?php echo $user['gender'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Type</b></td>
+                        <td>:<?php echo $user['type'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Balance (ArtCoin)</b></td>
+                        <td>:<?php echo $user['balance'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Date Of Birth</b></td>
+                        <td>:<?php echo $user['dateOfBirth'] ?></td>
+                    </tr>
 
+                    <tr>
+                        <td><b>Joining Date</b></td>
+                        <td>:<?php echo $user['joiningDate'] ?></td>
+                    </tr>
+                    <?php if($user['type'] == "Artist") { ?>
+                    <tr>
+                        <td><b>Total Views</b></td>
+                        <td>:<?php echo $user['totalViews'] ?></td>
+                    </tr>
+                    <?php }?>  
                     </table>
                 </td>
-                <td>
+                
                     
-                    </td>
-                    <td >
-                        <img src="assets/pp.jpg" alt="" width="200px"> <br>
-                        <input type="submit" name="edit" value="Edit">
-                    </td>
                     
                 </tr>
             </table>
+
+            <table class="buttonsContainer">
+                <tr>
+                    <td class="button">
+                        <?php if($user['type'] == "Artist") { ?>
+                            <a href="addArtwork.php">
+                                Add Artwork
+                            </a>
+                        <?php }?>
+                    </td>
+                    <td class="button">
+                        <a href="notifications.php">
+                            Notifications
+                        </a>
+                    </td>
+
+                    <td class="button">
+                        <a href="profile.php?userName=<?php echo $user['userName'] ?>">
+                            Public Profile
+                        </a>
+                    </td>
+                    <td class="button">
+                        <a href="editUser.php">
+                            Edit Details
+                        </a>
+                    </td>
+                    <td class="button">
+                        <a href="deleteUser.php">
+                            Delete Account
+                        </a>
+                    </td>
+                    <td class="button">
+                        <a href="../controllers/logout.php">
+                            Log Out
+                        </a>
+                    </td>
+
+
+
+                </tr>
+            </table>
+            
+
 </center>
 
 
 <center>
-    <h3>Artwork Collection</h3>
+    <h2>Artworks</h2>
 </center>
 
 <center>
-    <table>
+
+    <table class="artworksContainer">
         <tr>
-            <td>
-                <img src="assets/reyna.jpg" alt="" width="150px">
+            <?php while($artwork = mysqli_fetch_assoc($artworks)){ ?>
+            <td class="artworkCard">
+                <a href="artwork.php?id=<?php echo $artwork['id']?>">
+                    <img class="artwork" src="<?php echo $artwork['image'] ?>" alt="" >
+                    <p><center><b> <?php echo $artwork['artworkName'] ?> </b></center> </p>
+                    <p><center> <?php echo $artwork['price'] ?> ArtCoin </center></p>
+                </a>
                 
-                <p><b> Reyna </b> </p>
-                
-                <input type="submit" name="view" value="View">
             </td>
-            <td>
-                <img src="assets/reyna.jpg" alt="" width="150px">
-                
-                <p><b> Reyna </b> </p>
-                
-                <input type="submit" name="view" value="View">
-            </td>
-            <td>
-                <img src="assets/reyna.jpg" alt="" width="150px">
-                
-                <p><b> Reyna </b> </p>
-                
-                <input type="submit" name="view" value="View">
-            </td>
-            <td>
-                <img src="assets/reyna.jpg" alt="" width="150px">
-                
-                <p><b> Reyna </b> </p>
-                
-                <input type="submit" name="view" value="View">
-            </td>
-            <td>
-                <img src="assets/reyna.jpg" alt="" width="150px">
-                
-                <p><b> Reyna </b> </p>
-                
-                <input type="submit" name="view" value="View">
-            </td>
+            <?php   }?>
         </tr>
     </table>
+    
 </center>
 
 </body>

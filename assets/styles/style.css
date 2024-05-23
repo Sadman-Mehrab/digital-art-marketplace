@@ -1,0 +1,61 @@
+
+h2{
+    font-family: monospace;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-size: large;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+
+.profilePicture{
+    border-radius: 50%;
+    border: 5px solid rgb(150, 150, 150);
+    width: 250px;
+}
+.artwork{
+    border-radius: 15px;
+    width: 150px;
+}
+
+.artworksContainer{
+    border-spacing: 20px 0px;
+}
+
+.artworkCard{
+    border-radius: 25px;
+    background-color: rgb(241, 240, 240);
+    padding: 25px;
+}
+
+.userInfoCard{
+    border-radius: 25px;
+    background-color: rgb(241, 240, 240);
+    padding: 20px;
+    border-spacing: 20px 0px;
+    
+}
+
+.buttonsContainer{
+    margin: 10px;
+    border-spacing: 5px 0px;
+}
+
+.button{
+    border-radius: 10px;
+    background-color: rgb(241, 240, 240);
+    padding: 5px;
+    border: 1px solid rgb(150, 150, 150);
+}
+.generalText{
+    font-family: sans-serif;
+}
+.messageProfilePicture{
+    border-radius: 50%;
+    border: 1px solid rgb(150, 150, 150);
+    width: 40px;
+}
